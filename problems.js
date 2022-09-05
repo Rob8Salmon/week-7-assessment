@@ -1,78 +1,80 @@
-// 1. Sum zero
+/////////////////// ADD TO ZERO /////////////
 
-const addToZero = (arr) => {
-    for (let i = 0; i < arr.length; i++) {
-      for (let j = 1 + 1; j < arr.length; j++) {
-        if (!(arr[i] + arr[j])) {
-          return true;
-        }
+// Time complexity 0(n^2)
+// Space complexity 0(1)
+
+function addToZero(numbers) {
+  let test = false;
+  for (let j = 0; j < numbers.length; j++) {
+    for (let i = j + 1; i < numbers.length; i++) {
+      if (numbers[j] + numbers[i] === 0) {
+        console.log("True");
+        test = true;
+        return true;
       }
     }
-  
-    return false;
-  };
-  
-  console.log(addToZero([]));
-  // -> False
-  
-  console.log(addToZero([1]));
-  // -> False
-  
-  console.log(addToZero([1, 2, 3]));
-  // -> False
-  
-  console.log(addToZero([1, 2, 3, -2]));
-  // -> True
-  
-  // Time complexity: 0(n^2)
-  // space complexity: 0(1)
-  
-  // 2) Unique Characters
-  function hasUniqueChars(word) {
-    let uniqueChars = new Set([]);
-    for (let i = 0; i < word.length; i++) {
-      uniqueChars.add(word[i]);
-    }
-    return uniqueChars.size === word.length;
   }
-  
-  console.log(hasUniqueChars("Monday"));
-  console.log(hasUniqueChars("Moonday"));
-  
-  // time: 0(log n)
-  // space: 0(1)
-  
-  // 3) Pangram Sentence
-  
-  const isPangram = (str) => {
-    let abcStr = "abcdefghijklmnopqrstuvwxyz";
-    let newStr = str.toLowerCase();
-  
-    for (let i = 0; i < abcStr.length; i++) {
-      if (!newStr.includes(abcStr[i])) {
-        return false;
-      }
+  if (test === false) {
+    console.log("False");
+  }
+}
+
+addToZero([]);
+// -> False
+
+addToZero([1]);
+// -> False
+
+addToZero([1, 2, 3]);
+// -> False
+
+addToZero([1, 2, 3, -2]);
+// -> True
+
+////////////// HAS UNIQUE CHARACTERS ///////////////
+
+// Time complexity 0(n) --> Set has a time complexity of n !
+// Space complexity 0(1)
+
+function hasUniqueChars(word) {
+  return new Set(word).size === word.length;
+}
+
+console.log(hasUniqueChars("Monday"));
+// -> True
+
+console.log(hasUniqueChars("Moonday"));
+// -> False
+
+//////////////// PANGRAM SENTENCE /////////////////
+
+// time complexity 0(n)
+// space complexity 0(1)
+
+function isPangram(arr) {
+  return new Set(arr.toLowerCase().match(/[a-z]/g)).size === 26;
+}
+
+console.log(isPangram("The quick brown fox jumps over the lazy dog!"));
+// -> True
+
+console.log(isPangram("I like cats, but not mice"));
+// -> False
+
+///////////////// LONGEST WORD ///////////////////
+
+// time complexity 0(n)
+// Space complexity 0(1)
+
+function findLongestWord(arr) {
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].length > count) {
+      count = Number(arr[i].length);
     }
-  
-    return true;
-  };
-  
-  console.log(isPangram("The quick brown fox jumps over the lazy dog!"));
-  console.log(isPangram("I like cats, but not mice"));
-  
-  // Time: O(log n)
-  // space: O(1)
-  
-  isPangram("The quick brown fox jumps over the lazy dog!");
-  // -> True
-  
-  isPangram("I like cats, but not mice");
-  // -> False
-  
-  // 4) Longest Word
-    //   Don't understand this one
-  
-  console.log(findLongestWord(["hi", "hello"]));
-  
-  // time: 0(1);
-  // space: 0(1);
+  }
+  return count;
+}
+
+console.log(findLongestWord(["hi", "hello"]));
+// -> 5
